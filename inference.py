@@ -84,7 +84,7 @@ def perform(batch_size):
     total_start = time.time()
     result, pred_time = inference_model(batch_imgs)
     total_time = time.time() - total_start
-    print(results)
+    print(result)
     return {
         'model_name': model_name,
         'batch_size': batch_size,
