@@ -15,6 +15,5 @@ pip3 install -r requirements.txt
 
 ### Set AWS Configure to use S3 bucket
 ```
-sudo apt install awscli
 aws configure
 ```
