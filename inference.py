@@ -24,6 +24,8 @@ model = load_model(model_path, compile=True)
 s3 = boto3.resource('s3')
 s3_client = boto3.client('s3')
 
+filenames = [file.key for file in bucket.objects.all() if len(file.key.split('/')[1]) > 1]
+
 def read_image_from_s3(filename):
     bucket = s3.Bucket(bucket_name)
     object = bucket.Object(filename)
@@ -77,6 +79,7 @@ def inference_model(batch_imgs):
 
 
 def perform(batch_size):
+    file_list = filenames[:batch_size]
     batch_imgs = filenames_to_input(file_list)
 
     total_start = time.time()
