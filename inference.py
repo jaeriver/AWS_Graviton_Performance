@@ -20,14 +20,13 @@ model_name = 'resnet50'
 model_path = 'model/' + model_name
 model = load_model(model_path, compile=True)
 
-
 s3 = boto3.resource('s3')
 s3_client = boto3.client('s3')
 
+bucket = s3.Bucket(bucket_name)
 filenames = [file.key for file in bucket.objects.all() if len(file.key.split('/')[1]) > 1]
 
 def read_image_from_s3(filename):
-    bucket = s3.Bucket(bucket_name)
     object = bucket.Object(filename)
     response = object.get()
     file_stream = response['Body']
