@@ -2,10 +2,19 @@
 Check AWS Gravition (2 and 3) Instance Performance compared by AWS Intel Instance
 
 
-```sudo apt update
-sudo apt install python3-pip```
+### Configure ubuntu environment
+```
+sudo apt update
+sudo apt install python3-pip
+```
 
-```pip3 install -r requirements.txt```
+### Install python packages
+```
+pip3 install -r requirements.txt
+```
 
-```sudo apt install awscli
-aws configure```
+### Set AWS Configure to use S3 bucket
+```
+sudo apt install awscli
+aws configure
+```
