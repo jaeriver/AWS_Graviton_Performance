@@ -41,12 +41,3 @@ cd $HOME/tensorflow
 bazel build --config=opt --copt=-O3 --copt=-march=armv8.2-a+fp16+rcpc+dotprod+crypto --copt=-flax-vector-conversions //tensorflow/tools/pip_package:build_pip_package
 ```
 
-Run an inference task:
-```
-cd $HOME/tensorflow/tensorflow/examples/label_image/data
-wget https://storage.googleapis.com/download.tensorflow.org/models/inception_v3_2016_08_28_frozen.pb.tar.gz
-tar xf inception_v3_2016_08_28_frozen.pb.tar.gz
-cd $HOME/tensorflow
-bazel build --config=opt --copt=-O3 --copt=-march=armv8.2-a+fp16+rcpc+dotprod+crypto --copt=-flax-vector-conversions tensorflow/examples/label_image/...
-bazel-bin/tensorflow/examples/label_image/label_image
-```
