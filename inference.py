@@ -94,4 +94,6 @@ def perform(batch_size):
 
 if __name__ == "__main__":
     for batch_size in batch_list:
+        print(batch_size)
+        print(type(batch_size)
         print(perform(batch_size))
