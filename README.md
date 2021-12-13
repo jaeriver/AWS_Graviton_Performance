@@ -18,7 +18,7 @@ pip3 install -r requirements.txt
 aws configure
 ```
 
-# Building TensorFlow on Graviton2
+## Building TensorFlow on Graviton2
 
 Install bazel build system:
 ```
