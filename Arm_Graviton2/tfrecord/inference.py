@@ -119,7 +119,7 @@ for batch_size in batch_list:
   iter_ds = pd.DataFrame()
   
   print(f'{batch_size} start')
-  res, iter_times = =inference(model_type, int(batch_size))
+  res, iter_times = inference(model_type, int(batch_size))
   col_name = lambda opt: f'graviton_{model_type}_{batch_size}'
   
   iter_ds = pd.concat([iter_ds, pd.DataFrame(iter_times, columns=[col_name(opt)])], axis=1)
