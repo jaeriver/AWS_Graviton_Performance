@@ -101,7 +101,7 @@ def inference(model_type, batch_size):
         counter+=1
     iter_times = np.array(iter_times)
     acc = np.sum(np.array(actual_labels) == np.array(pred_labels))/len(actual_labels)
-    results = pd.DataFrame(columns = [f'graviton_{model_type}_{batch_size}'])
+    results = pd.DataFrame(columns = [f'intel_{model_type}_{batch_size}'])
     results.loc['batch_size']              = [batch_size]
     results.loc['accuracy']                = [acc]
     results.loc['first_prediction_time']   = [first_iter_time]
@@ -120,7 +120,7 @@ for batch_size in batch_list:
   
   print(f'{batch_size} start')
   res, iter_times = inference(model_type, int(batch_size))
-  col_name = lambda opt: f'graviton_{model_type}_{batch_size}'
+  col_name = lambda opt: f'intel_{model_type}_{batch_size}'
   
   iter_ds = pd.concat([iter_ds, pd.DataFrame(iter_times, columns=[col_name(opt)])], axis=1)
   results = pd.concat([results, res], axis=1)
