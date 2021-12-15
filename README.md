@@ -44,7 +44,7 @@ docker push $ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/<your image name>
 ```
 ### Pull the AWS ECR docker image on AWS Graviton Instance
 ```
-docker pull 741926482963.dkr.ecr.us-west-2.amazonaws.com/<your image name>
+docker pull $ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/<your image name>
 ```
 
 
