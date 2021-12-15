@@ -3,3 +3,5 @@ Pillow
 tensorflow
 boto3
 awscli
+pandas
+matplotlib
