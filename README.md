@@ -32,7 +32,7 @@ cd Tool-Solutions/docker/tensorflow-aarch64
 ```
 aws configure
 ```
-## Login AWS ECR
+### Login AWS ECR
 - before this job, you should make your ECR in your aws account
 ```
 aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin $ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com
