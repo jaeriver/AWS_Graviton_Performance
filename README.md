@@ -1,43 +1,55 @@
 # AWS_Graviton_Performance
 Check AWS Gravition (2 and 3) Instance Performance compared by AWS Intel Instance
 
+## Building TensorFlow Docker Image for Graviton2 in AWS ECR
+### install docker & git
+```
+sudo yum update -y
+sudo yum install git docker docker-registry -y
+```
 
+### systemctl start docker service
+```
+systemctl enable docker.service
+systemctl start docker.service
+systemctl status docker.service
+```
 ### Configure ubuntu environment
 ```
 sudo apt update
 sudo apt install python3-pip
 ```
-
-### Install python packages
+### clone to build tensorflow
 ```
-pip3 install -r requirements.txt
+git clone https://github.com/ARM-software/Tool-Solutions.git
+cd Tool-Solutions/docker/tensorflow-aarch64
 ```
+### build tensorflow
+```
+./build.sh  --onednn armpl --build-type tensorflow --jobs 16 --bazel_memory_limit 10485760
+```
+- It takes about 2~3 hours
 
-### Set AWS Configure to use S3 bucket
+### Set AWS Configure to push AWS ECR
 ```
 aws configure
 ```
 
-## Building TensorFlow on Graviton2
-
-Install bazel build system:
+## Login AWS ECR
+- before this job, you should make your ECR in your aws account
 ```
-# find the latest release of bazel for arm64 https://github.com/bazelbuild/bazel/releases/latest
-# using older bazel versions may not be supported to build tensorflow
-REL=4.2.1  # this is the latest stable release as of this writing
-wget https://github.com/bazelbuild/bazel/releases/download/${REL}/bazel-${REL}-linux-arm64
-chmod +x bazel-${REL}-linux-arm64
-sudo mv bazel-${REL}-linux-arm64 /usr/local/bin
-sudo ln -s /usr/local/bin/bazel-${REL}-linux-arm64 /usr/local/bin/bazel
+aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin $ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com
 ```
 
-Build TensorFlow on Graviton2 with Ubuntu 20.04:
+### docker push
 ```
-sudo apt install build-essential python python3-pip
-sudo pip3 install numpy keras_preprocessing
-git clone https://github.com/tensorflow/tensorflow $HOME/tensorflow
-cd $HOME/tensorflow
-./configure
-bazel build --config=opt --copt=-O3 --copt=-march=armv8.2-a+fp16+rcpc+dotprod+crypto --copt=-flax-vector-conversions //tensorflow/tools/pip_package:build_pip_package
+export ACCOUNT_ID = <your account id>
+docker push $ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/<your image name>
 ```
+
+### Pull the AWS ECR docker image on AWS Graviton Instance
+```
+docker pull 741926482963.dkr.ecr.us-west-2.amazonaws.com/<your image name>
+```
+
 
