@@ -1,12 +1,12 @@
 # AWS_Graviton_Performance
 Check AWS Gravition (2 and 3) Instance Performance compared by AWS Intel Instance
 ## Building TensorFlow Docker Image for Graviton2 in AWS ECR
-### install docker & git
+### Install docker & git
 ```
 sudo yum update -y
 sudo yum install git docker docker-registry -y
 ```
-### systemctl start docker service
+### Start docker service
 ```
 systemctl enable docker.service
 systemctl start docker.service
@@ -17,12 +17,12 @@ systemctl status docker.service
 sudo apt update
 sudo apt install python3-pip
 ```
-### clone to build tensorflow
+### Clone to build tensorflow
 ```
 git clone https://github.com/ARM-software/Tool-Solutions.git
 cd Tool-Solutions/docker/tensorflow-aarch64
 ```
-### build tensorflow
+### Build tensorflow
 ```
 ./build.sh  --onednn armpl --build-type tensorflow --jobs 16 --bazel_memory_limit 10485760
 ```
@@ -37,7 +37,7 @@ aws configure
 ```
 aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin $ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com
 ```
-### docker push
+### Docker push
 ```
 export ACCOUNT_ID = <your account id>
 docker push $ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/<your image name>
