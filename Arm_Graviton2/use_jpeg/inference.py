@@ -17,7 +17,7 @@ parser.add_argument('-l', '--batch_list',
 batch_list = parser.parse_args().batch_list
 
 model_name = 'resnet50'
-model_path = '../model/' + model_name
+model_path = '~AWS_Graviton_Performance/model/' + model_name
 model = load_model(model_path, compile=True)
 
 s3 = boto3.resource('s3')
