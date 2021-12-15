@@ -1,0 +1,5 @@
+numpy
+Pillow
+tensorflow
+boto3
+awscli
