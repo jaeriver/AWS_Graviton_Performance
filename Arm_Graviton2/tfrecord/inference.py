@@ -79,7 +79,7 @@ def inference(model_type, batch_size):
     display_threshold = display_every
     
     ds = get_dataset(batch_size)
-    saved_model_name = f"../../{model_type}"
+    saved_model_name = f"../../model/{model_type}"
     load_start = time.time()
     model = load_model(saved_model_name)
     load_time = time.time() - load_start
