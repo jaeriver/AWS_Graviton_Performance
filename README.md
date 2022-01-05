@@ -35,11 +35,11 @@ aws configure
 ### Login AWS ECR
 - before this job, you should make your ECR in your aws account
 ```
+export ACCOUNT_ID = <your account id>
 aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin $ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com
 ```
 ### Docker push
 ```
-export ACCOUNT_ID = <your account id>
 docker push $ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/<your image name>
 ```
 ### Pull the AWS ECR docker image on AWS Graviton Instance
